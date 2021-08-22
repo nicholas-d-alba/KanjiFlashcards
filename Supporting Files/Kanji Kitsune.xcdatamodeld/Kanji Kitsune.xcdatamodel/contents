@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="KanaReading" representedClassName="KanaReading" syncable="YES">
+        <attribute name="reading" attributeType="String"/>
+        <attribute name="restrictions" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="kanaReadings" inverseEntity="Word"/>
+    </entity>
+    <entity name="Kanji" representedClassName="Kanji" syncable="YES">
+        <attribute name="jlpt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="kunReadings" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="mastery" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="meanings" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="onReadings" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="strokes" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="KanjiResources" representedClassName="KanjiResources" syncable="YES">
+        <attribute name="hints" attributeType="Transformable" valueTransformerName="HintValueTransformer" customClassName="[Hint]"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="words" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Word" inverseName="kanjiResources" inverseEntity="Word"/>
+    </entity>
+    <entity name="Meaning" representedClassName="Meaning" syncable="YES">
+        <attribute name="definitions" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="examples" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="fields" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="miscellaneousEntities" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="order" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="meanings" inverseEntity="Word"/>
+    </entity>
+    <entity name="Word" representedClassName="Word" syncable="YES">
+        <attribute name="kanjiSpellings" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="priority" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="kanaReadings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KanaReading" inverseName="word" inverseEntity="KanaReading"/>
+        <relationship name="kanjiResources" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KanjiResources" inverseName="words" inverseEntity="KanjiResources"/>
+        <relationship name="meanings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Meaning" inverseName="word" inverseEntity="Meaning"/>
+    </entity>
+    <elements>
+        <element name="KanaReading" positionX="-9" positionY="81" width="128" height="74"/>
+        <element name="Kanji" positionX="-63" positionY="-18" width="128" height="134"/>
+        <element name="KanjiResources" positionX="-54" positionY="45" width="128" height="74"/>
+        <element name="Meaning" positionX="9" positionY="99" width="128" height="119"/>
+        <element name="Word" positionX="-36" positionY="54" width="128" height="104"/>
+    </elements>
+</model>
